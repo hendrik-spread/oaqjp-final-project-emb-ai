@@ -23,11 +23,22 @@ def emotion_detector(text_to_analyze):
     joy_score = emotions["joy"]
     sadness_score = emotions["sadness"]
 
-    return {
-        'anger': anger_score,
-        'disgust': disgust_score,
-        'fear': fear_score,
-        'joy': joy_score,
-        'sadness': sadness_score,
-        'dominant_emotion': max(emotions, key=emotions.get)
-    }
+    if response.status_code == 200:
+        return {
+            'anger': anger_score,
+            'disgust': disgust_score,
+            'fear': fear_score,
+            'joy': joy_score,
+            'sadness': sadness_score,
+            'dominant_emotion': max(emotions, key=emotions.get)
+        }
+
+    if response.status_code == 400:
+        return {
+            'anger': None,
+            'disgust': None,
+            'fear': None,
+            'joy': None,
+            'sadness': None,
+            'dominant_emotion': None
+        }
